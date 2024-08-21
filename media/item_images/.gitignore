@@ -1,0 +1,6 @@
+# Ignore all files and directories
+*
+
+# Do not ignore this .gitignore file
+!.gitignore
+!empty_image.jpg

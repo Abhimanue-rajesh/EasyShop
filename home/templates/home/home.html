@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block page_content %}
+    <div class="container">
+        <div class="row ">
+            {% for item in all_items %}
+                <div class="col card m-2">
+                    <img src="media/{{ item.image }}"
+                         class="card-img-top p-2 rounded-4"
+                         alt="{{ item.name }}"
+                         width="200px"
+                         height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text">₹ {{ item.price|intcomma }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock page_content %}
