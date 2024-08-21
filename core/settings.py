@@ -23,6 +23,8 @@ INSTALLED_APPS = [
 
 EXTERNAL_APPS = [
     "accounts.apps.AccountsConfig",
+    "home.apps.HomeConfig",
+    "inventory.apps.InventoryConfig",
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -147,3 +149,6 @@ LOGGING = {
         "level": "WARNING",
     },
 }
+
+# TODO need to change the redirection
+LOGIN_REDIRECT_URL = 'home'
