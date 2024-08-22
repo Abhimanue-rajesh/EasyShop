@@ -29,7 +29,7 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'home' %}">
           <img src="{% static 'images/shop-ease.png' %}"
                alt="Logo"
                width="30"
@@ -49,11 +49,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
             </li>
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="#"><i class="bi bi-cart"></i> Cart</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'create_item' %}"><i class="bi bi-bag-plus"></i> Add Item</a>
               </li>
               <li class="nav-item">
                 <form action="{% url 'logout' %}" method="post">
