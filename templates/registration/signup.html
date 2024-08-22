@@ -1,0 +1,45 @@
+{% extends "registration/un_authenticated_base.html" %}
+{% load static %}
+{% block form_block %}
+    <div class="col-md-6 shadow-lg border rounded-4 p-3">
+        <div class="text-center">
+            <img src="{% static 'images/shop-ease.png' %}"
+                 alt="Logo"
+                 width="70"
+                 height="70"
+                 class="d-inline-block align-text-top">
+        </div>
+        <div class="text-center">
+            <h4>Register</h4>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">{{ form.username.label_tag }} {{ form.username }}</div>
+            <div class="row">
+                <div class="col form-group mb-2">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
+                <div class="col form-group mb-2">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
+            </div>
+            <div class="row">
+                <div class="col form-group mb-2">{{ form.password1.label_tag }} {{ form.password1 }}</div>
+                <div class="col form-group mb-2">{{ form.password2.label_tag }} {{ form.password2 }}</div>
+            </div>
+            <div class="text-end mb-3">
+                <button type="submit" class="btn btn-primary w-100">Register</button>
+            </div>
+            <div class="row text-center mt-2">
+                <div class="col">
+                    <hr>
+                </div>
+                <div class="col-6 m-0 p-0">Aldready have a ShopEase Account?</div>
+                <div class="col">
+                    <hr>
+                </div>
+                <div class="text-end mb-3">
+                    <a type="submit"
+                       class="btn btn-primary w-100"
+                       href="{% url 'login' %}">Login to your account</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock form_block %}

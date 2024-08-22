@@ -1,98 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ page_title }} | ShopEase</title>
-        <!-- Favicon.ico -->
-        <link rel="shortcut icon"
-              href="{% static 'favicon.ico' %}"
-              type="image/x-icon">
-        <!--Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-              crossorigin="anonymous">
-        <!-- Bootstrap Icons -->
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <!-- Custom Css -->
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
-        <!-- Meta Description -->
-        <meta name="description"
-              content="An e-commerse web page">
-        <!-- Meta Keywords -->
-        <meta name="keywords"
-              content="selling, e-commerse">
-        {% block page_specific_links %}
-        {% endblock page_specific_links %}
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">
-                <img src="{% static "images/shop-ease.png" %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                ShopEase
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-cart"></i> Cart</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-              </div>
-            </div>
-          </nav>
-        {% block page_content %}
-        {% endblock page_content %}
-        <div class="spinner-wrapper">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            {% if messages %}
-                {% for message in messages %}
-                    <div id="liveToast{{ forloop.counter }}"
-                         class="toast align-items-center bg-{{ message.tags }} border-0"
-                         role="alert"
-                         aria-live="assertive"
-                         aria-atomic="true"
-                         data-bs-delay="10000">
-                        <div class="toast-header">
-                            <img src="{% static 'images/PulseFlow.png' %}"
-                                 class="rounded me-2"
-                                 alt="Pulseflow"
-                                 width="15px"
-                                 height="15px">
-                            <strong class="me-auto">Notification</strong>
-                            <small class="text-muted">Just now</small>
-                            <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="toast"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">{{ message }}</div>
-                    </div>
-                {% endfor %}
+  {% load static %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} | ShopEase</title>
+    <!-- Favicon.ico -->
+    <link rel="shortcut icon"
+          href="{% static 'favicon.ico' %}"
+          type="image/x-icon">
+    <!--Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- Meta Description -->
+    <meta name="description" content="An e-commerce web page">
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="selling, e-commerce">
+    {% block page_specific_links %}
+    {% endblock page_specific_links %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'images/shop-ease.png' %}"
+               alt="Logo"
+               width="30"
+               height="24"
+               class="d-inline-block align-text-top">
+          ShopEase
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-cart"></i> Cart</a>
+              </li>
+              <li class="nav-item">
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-danger mx-1" type="submit">
+                    <i class="bi bi-box-arrow-left"></i> Logout
+                  </button>
+                </form>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "login" %}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'signup' %}"><i class="bi bi-person-plus"></i> Signup</a>
+              </li>
             {% endif %}
+          </ul>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                crossorigin="anonymous"></script>
-    </body>
-    <script>
+      </div>
+    </nav>
+    {% block page_content %}
+    {% endblock page_content %}
+    <div class="spinner-wrapper">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      {% if messages %}
+        {% for message in messages %}
+          <div id="liveToast{{ forloop.counter }}"
+               class="toast align-items-center bg-{{ message.tags }} border-0"
+               role="alert"
+               aria-live="assertive"
+               aria-atomic="true"
+               data-bs-delay="10000">
+            <div class="toast-header">
+              <img src="{% static 'images/PulseFlow.png' %}"
+                   class="rounded me-2"
+                   alt="Pulseflow"
+                   width="15px"
+                   height="15px">
+              <strong class="me-auto">Notification</strong>
+              <small class="text-muted">Just now</small>
+              <button type="button"
+                      class="btn-close"
+                      data-bs-dismiss="toast"
+                      aria-label="Close"></button>
+            </div>
+            <div class="toast-body">{{ message }}</div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+  </body>
+  <script>
         document.addEventListener('DOMContentLoaded', function () {
             {% if messages %}
                 var toastElList = [].slice.call(document.querySelectorAll('.toast'))
@@ -104,10 +125,10 @@
         });
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% block page_specific_scripts %}
-    {% endblock page_specific_scripts %}
-    <!-- Custom js -->
-    <script src="{% static 'js/main.js' %}"></script>
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% block page_specific_scripts %}
+  {% endblock page_specific_scripts %}
+  <!-- Custom js -->
+  <script src="{% static 'js/main.js' %}"></script>
 </html>

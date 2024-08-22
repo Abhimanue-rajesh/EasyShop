@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8">
+        <!-- Favicon.ico -->
+        <link rel="shortcut icon"
+              href="{% static 'favicon.ico' %}"
+              type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login | ShopEase</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+              crossorigin="anonymous">
+        <!-- Custom Css -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <!-- Meta Description -->
+        <meta name="description" content="An e-commerce web page">
+        <!-- Meta Keywords -->
+        <meta name="keywords" content="selling, e-commerce">
+    </head>
+    <body class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% block form_block %}
+                {% endblock form_block %}
+            </div>
+        </div>
+    </body>
+</html>

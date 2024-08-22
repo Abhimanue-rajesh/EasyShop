@@ -153,3 +153,4 @@ LOGGING = {
 
 # TODO need to change the redirection
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/'
