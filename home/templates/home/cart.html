@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block page_content %}
+    <div class="container">
+        <div class="p-3 border rounded-4 shadow-lg my-3">
+            <h3>Shopping Cart</h3>
+            <hr>
+            {% if cart_items %}
+                {% for cart_item in cart_items %}
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="/media/{{ cart_item.item.image }}"
+                                 class="card-img-top p-2 rounded-4"
+                                 alt="{{ item.name }}"
+                                 width="100px"
+                                 height="130px">
+                        </div>
+                        <div class="col">
+                            <h3 class="mt-1">{{ cart_item.item.name }}</h3>
+                            <p>
+                                Quantity : <span>{{ cart_item.quantity }}</span>
+                            </p>
+                            <p>
+                                Description : <span>{{ cart_item.item.description }}</span>
+                            </p>
+                        </div>
+                        <div class="col-2 d-flex flex-column">
+                            <div class="content">
+                                <h3 class="mt-1">₹ {{ cart_item.item.price|intcomma }}</h3>
+                            </div>
+                            <a href="{% url 'remove_from_cart' cart_item.id %}" class="btn btn-outline-danger mt-auto">Remove</a>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info" role="alert">Your cart is empty.</div>
+            {% endif %}
+            <div class="text-end">
+                <h2>Total Amount: {{ total_amount|intcomma }}</h2>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
