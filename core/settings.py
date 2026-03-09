@@ -13,6 +13,7 @@ DEBUG = os.getenv("DEBUG", default=False)
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    "unfold",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,6 +24,7 @@ INSTALLED_APPS = [
 ]
 
 EXTERNAL_APPS = [
+    "django_lumen",
     "accounts.apps.AccountsConfig",
     "home.apps.HomeConfig",
     "inventory.apps.InventoryConfig",

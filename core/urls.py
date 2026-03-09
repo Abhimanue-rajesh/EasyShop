@@ -12,4 +12,5 @@ urlpatterns = [
     path('accounts/', include("accounts.urls")),
     path('', include("home.urls")),
     path('inventory/', include("inventory.urls")),
+    path("lumen/", include("django_lumen.urls")),
 ]

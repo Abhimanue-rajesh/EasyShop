@@ -1,5 +1,14 @@
 from django.contrib import admin
-from . import models
+from unfold.admin import ModelAdmin
 
-admin.site.register(models.Item)
-admin.site.register(models.ItemCategory)
+from inventory.models import Item, ItemCategory
+
+
+@admin.register(Item)
+class ItemsAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(ItemCategory)
+class ItemCategoriesAdmin(ModelAdmin):
+    pass
